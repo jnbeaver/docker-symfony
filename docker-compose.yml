@@ -7,10 +7,18 @@ services:
         ports:
             - "3306:3306"
         environment:
-            MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: symfony
-            MYSQL_USER: symfony
-            MYSQL_PASSWORD: symfony
+            MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${DATABASE_NAME}
+            MYSQL_USER: ${DATABASE_USER}
+            MYSQL_PASSWORD: ${DATABASE_PASSWORD}
+        networks:
+            - db
+    db-admin:
+        container_name: db-admin
+        image: adminer
+        restart: always
+        ports:
+            - "8080:8080"
         networks:
             - db
     php:
